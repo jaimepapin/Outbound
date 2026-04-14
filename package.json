@@ -1,0 +1,1 @@
+{\n  \"name\": \"groq-api-proxy\",\n  \"version\": \"1.0.0\",\n  \"description\": \"A proxy server for Groq API\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"start\": \"node index.js\"\n  },\n  \"dependencies\": {\n    \"express\": \"^4.18.2\",\n    \"axios\": \"^0.21.1\"\n  }\n}
