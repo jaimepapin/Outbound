@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Outound — Internship Outreach</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg-root:     #0a0a0b;
+    --bg-surface:  #111114;
+    --bg-elevated: #18181c;
+    --bg-overlay:  #1e1e24;
+
+    --border-subtle:  rgba(255,255,255,0.06);
+    --border-default: rgba(255,255,255,0.10);
+    --border-strong:  rgba(255,255,255,0.18);
+
+    --text-primary:   #f0f0f2;
+    --text-secondary: #8b8b9a;
+    --text-tertiary:  #52525e;
+
+    --accent:       #7c5cfc;
+    --accent-hover: #9678fd;
+    --accent-glow:  rgba(124,92,252,0.25);
+    --accent-subtle: rgba(124,92,252,0.10);
+    --success: #23c45e;
+    --success-subtle: rgba(35,196,94,0.12);
+    --error: #f03e3e;
+    --error-subtle: rgba(240,62,62,0.12);
+
+    --gradient-brand: linear-gradient(135deg, #7c5cfc, #a78bfa);
+    --gradient-surface: linear-gradient(180deg, rgba(124,92,252,0.04) 0%, transparent 100%);
+
+    --radius: 16px;
+    --radius-sm: 10px;
+    --radius-xs: 6px;
+
+    --text-xs:   11px;
+    --text-sm:   13px;
+    --text-base: 15px;
+    --text-lg:   17px;
+    --text-xl:   22px;
+    --text-2xl:  30px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-feature-settings: 'cv02','cv03','cv04','cv11';
+    background: var(--bg-root);
+    color: var(--text-primary);
+    font-size: var(--text-base);
+    line-height: 1.5;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 45% at 50% 0%, rgba(124,92,252,0.09), transparent);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 64px 24px 80px;
+  }
+
+  /* ── Header ── */
+  .header { margin-bottom: 32px; }
+
+  .header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+
+  .app-title {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+  }
+
+  .gen-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: var(--accent-subtle);
+    border: 1px solid rgba(124,92,252,0.3);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: #a78bfa;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .gen-badge.unlimited {
+    background: var(--success-subtle);
+    border-color: rgba(35,196,94,0.3);
+    color: var(--success);
+  }
+
+  .gen-badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.7;
+  }
+
+  .app-subtitle {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* ── Card ── */
+  .card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5), 0 8px 32px rgba(0,0,0,0.35);
+    background-image: var(--gradient-surface);
+  }
+
+  .form-card {
+    padding: 28px;
+    margin-bottom: 16px;
+  }
+
+  /* ── Form ── */
+  .form-section { margin-bottom: 20px; }
+
+  .form-row { margin-bottom: 16px; }
+  .form-row:last-child { margin-bottom: 0; }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  label {
+    display: block;
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="url"],
+  textarea {
+    width: 100%;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    padding: 11px 14px;
+    font: inherit;
+    font-size: var(--text-sm);
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+    -webkit-appearance: none;
+  }
+
+  input::placeholder { color: var(--text-tertiary); }
+  input:focus {
+    border-color: var(--border-strong);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+
+  .input-wrapper { position: relative; }
+  .input-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    transition: color 150ms ease;
+    line-height: 1;
+  }
+  .input-toggle:hover { color: var(--text-secondary); }
+
+  .input-hint {
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+    margin-top: 5px;
+  }
+  .input-hint a { color: var(--text-secondary); }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border-subtle);
+    margin: 20px 0;
+  }
+
+  /* ── Button ── */
+  .btn-primary {
+    width: 100%;
+    height: 44px;
+    background: var(--gradient-brand);
+    color: #fff;
+    font: inherit;
+    font-size: var(--text-base);
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.4), 0 0 20px var(--accent-glow);
+    transition: transform 80ms ease, box-shadow 150ms ease, opacity 150ms ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    letter-spacing: -0.01em;
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 0 32px rgba(124,92,252,0.4);
+  }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-primary:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-xs);
+    color: var(--text-secondary);
+    font: inherit;
+    font-size: var(--text-xs);
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: color 150ms ease, border-color 150ms ease, background 150ms ease;
+    white-space: nowrap;
+  }
+  .btn-ghost:hover {
+    color: var(--text-primary);
+    border-color: var(--border-strong);
+    background: var(--bg-overlay);
+  }
+
+  /* ── Spinner ── */
+  .spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    flex-shrink: 0;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .btn-label { transition: opacity 150ms ease; }
+
+  /* ── Results ── */
+  .results { display: none; flex-direction: column; gap: 16px; }
+  .results.visible { display: flex; }
+
+  .result-card {
+    padding: 22px 24px;
+    position: relative;
+    animation: fadeUp 300ms cubic-bezier(0.16,1,0.3,1) both;
+  }
+  .result-card:nth-child(2) { animation-delay: 80ms; }
+  .result-card:nth-child(3) { animation-delay: 160ms; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .result-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .result-card-label {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .label-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .label-dot.green { background: var(--success); }
+  .label-dot.purple { background: var(--accent); }
+
+  /* ── Contact info ── */
+  .contact-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--accent-subtle);
+    border: 1px solid rgba(124,92,252,0.2);
+    color: #a78bfa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .contact-name { font-size: var(--text-lg); font-weight: 600; letter-spacing: -0.01em; }
+  .contact-sub {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .confidence-badge {
+    display: inline-flex;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .confidence-badge.high   { background: var(--success-subtle); color: var(--success); }
+  .confidence-badge.medium { background: rgba(245,165,36,0.12); color: #f5a524; }
+  .confidence-badge.low    { background: var(--error-subtle); color: var(--error); }
+
+  .domain-row {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .domain-row-item { display: flex; flex-direction: column; gap: 2px; }
+  .domain-row-key { font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); }
+  .domain-row-val { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; font-weight: 500; }
+
+  .email-list { display: flex; flex-direction: column; gap: 6px; }
+
+  .email-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 12px;
+    border-radius: var(--radius-xs);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    gap: 12px;
+  }
+  .email-item.primary {
+    background: rgba(124,92,252,0.08);
+    border-color: rgba(124,92,252,0.25);
+  }
+  .email-item code {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 13px;
+    color: var(--text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .email-item.primary code { color: #c4b5fd; }
+  .email-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .email-tag.primary-tag { color: #a78bfa; }
+  .email-tag.fallback-tag { color: var(--text-tertiary); }
+
+  .verify-note {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: rgba(245,165,36,0.06);
+    border: 1px solid rgba(245,165,36,0.18);
+    border-radius: var(--radius-xs);
+    font-size: var(--text-xs);
+    color: #a37c1a;
+    line-height: 1.5;
+  }
+  .verify-note a { color: #d4a017; }
+
+  /* ── Pitch card ── */
+  .subject-row {
+    background: var(--accent-subtle);
+    border: 1px solid rgba(124,92,252,0.2);
+    border-radius: var(--radius-xs);
+    padding: 10px 14px;
+    margin-bottom: 14px;
+  }
+  .subject-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: #8b7fd4; margin-bottom: 3px; }
+  .subject-text { font-size: var(--text-sm); font-weight: 500; color: #c4b5fd; }
+
+  .body-text {
+    font-size: var(--text-sm);
+    line-height: 1.75;
+    color: var(--text-secondary);
+    white-space: pre-wrap;
+    padding: 14px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xs);
+    margin-bottom: 14px;
+  }
+
+  .pitch-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  /* ── Error ── */
+  .error-box {
+    background: var(--error-subtle);
+    border: 1px solid rgba(240,62,62,0.25);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-size: var(--text-sm);
+    color: #f87171;
+    display: none;
+    margin-bottom: 16px;
+  }
+  .error-box.visible { display: block; }
+
+  /* ── Paywall overlay ── */
+  .paywall-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.78);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 24px;
+    animation: overlayIn 200ms ease;
+  }
+  .paywall-overlay[hidden] { display: none; }
+
+  @keyframes overlayIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .paywall-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 20px;
+    padding: 40px 36px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    box-shadow:
+      0 0 0 1px var(--border-subtle),
+      0 24px 80px rgba(0,0,0,0.7),
+      0 0 80px var(--accent-glow);
+    animation: cardIn 260ms cubic-bezier(0.16,1,0.3,1);
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: scale(0.94) translateY(12px); }
+    to   { opacity: 1; transform: scale(1)    translateY(0); }
+  }
+
+  .paywall-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-tertiary);
+    cursor: pointer;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 150ms ease, border-color 150ms ease;
+    font: inherit;
+  }
+  .paywall-close:hover { color: var(--text-primary); border-color: var(--border-default); }
+
+  .paywall-pro-badge {
+    display: inline-block;
+    background: var(--gradient-brand);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+
+  .paywall-title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .paywall-subtitle {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+
+  .paywall-features {
+    text-align: left;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  .feature-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--text-sm);
+    color: var(--text-primary);
+  }
+
+  .feature-check {
+    color: var(--success);
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .btn-upgrade {
+    width: 100%;
+    height: 48px;
+    background: var(--gradient-brand);
+    color: #fff;
+    font: inherit;
+    font-size: var(--text-base);
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 0 30px var(--accent-glow);
+    transition: transform 80ms ease, box-shadow 150ms ease;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+  }
+  .btn-upgrade:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 48px rgba(124,92,252,0.5);
+  }
+  .btn-upgrade:active { transform: translateY(0); }
+
+  .paywall-fine-print {
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+    line-height: 1.5;
+  }
+
+  /* ── Toast ── */
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+    background: var(--bg-overlay);
+    border: 1px solid var(--success);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--success);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 16px rgba(35,196,94,0.2);
+    z-index: 2000;
+    white-space: nowrap;
+    animation: toastIn 300ms cubic-bezier(0.16,1,0.3,1);
+  }
+  .toast.hiding { animation: toastOut 200ms ease forwards; }
+
+  @keyframes toastIn  { from { opacity: 0; transform: translateX(-50%) translateY(12px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+  @keyframes toastOut { from { opacity: 1; transform: translateX(-50%) translateY(0); }    to { opacity: 0; transform: translateX(-50%) translateY(8px); } }
+
+  /* ── Shake ── */
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%       { transform: translateX(-6px); }
+    40%       { transform: translateX(6px); }
+    60%       { transform: translateX(-4px); }
+    80%       { transform: translateX(4px); }
+  }
+  .shake { animation: shake 400ms cubic-bezier(0.36,0.07,0.19,0.97); }
+
+  /* ── Responsive ── */
+  @media (max-width: 480px) {
+    .page-wrapper { padding: 40px 16px 60px; }
+    .form-card { padding: 20px; }
+    .form-grid { grid-template-columns: 1fr; }
+    .paywall-card { padding: 32px 22px; }
+    .pitch-actions { flex-direction: column; }
+    .pitch-actions .btn-ghost { width: 100%; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrapper">
+  <header class="header">
+    <div class="header-top">
+      <h1 class="app-title">Outound</h1>
+      <span class="gen-badge" id="gen-badge">
+        <span class="gen-badge-dot"></span>
+        <span id="gen-badge-text">3 free generations left</span>
+      </span>
+    </div>
+    <p class="app-subtitle">LinkedIn URL + company → guessed emails + ready-to-send cold pitch</p>
+  </header>
+
+  <div id="error-box" class="error-box"></div>
+
+  <form class="card form-card" id="main-form" novalidate>
+    <div class="form-section">
+      <div class="form-row">
+        <label for="linkedin-url">LinkedIn Profile URL</label>
+        <input type="url" id="linkedin-url" placeholder="https://linkedin.com/in/jane-smith-12345" autocomplete="off" spellcheck="false" />
+      </div>
+
+      <div class="form-grid form-row">
+        <div>
+          <label for="company-input">Company</label>
+          <input type="text" id="company-input" placeholder="Google" />
+        </div>
+        <div>
+          <label for="role-input">Role</label>
+          <input type="text" id="role-input" placeholder="SWE Intern" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label for="background-input">Your Background</label>
+        <input type="text" id="background-input" placeholder="2nd year CS, built 3 iOS apps with 10k+ downloads" />
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="form-row">
+      <label for="groq-key">
+        Groq API Key
+        <span style="text-transform:none;letter-spacing:0;font-weight:400;color:var(--text-tertiary)"> — free at console.groq.com, saved locally</span>
+      </label>
+      <div class="input-wrapper">
+        <input type="password" id="groq-key" placeholder="gsk_..." autocomplete="off" spellcheck="false" style="padding-right:44px" />
+        <button type="button" class="input-toggle" id="key-toggle" title="Show/hide key">👁</button>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-primary" id="btn-submit">
+      <span class="btn-label" id="btn-label">Generate pitch →</span>
+    </button>
+  </form>
+
+  <div class="results" id="results"></div>
+</div>
+
+<!-- Paywall -->
+<div class="paywall-overlay" id="paywall-overlay" hidden>
+  <div class="paywall-card">
+    <button class="paywall-close" id="paywall-close" aria-label="Close">✕</button>
+    <div class="paywall-pro-badge">Pro</div>
+    <h2 class="paywall-title">You've used your 3 free generations</h2>
+    <p class="paywall-subtitle">Upgrade once, generate forever. No subscription — one-time payment.</p>
+    <div class="paywall-features">
+      <div class="feature-row"><span class="feature-check">✓</span><span>Unlimited email guesses</span></div>
+      <div class="feature-row"><span class="feature-check">✓</span><span>Unlimited AI cold pitches</span></div>
+      <div class="feature-row"><span class="feature-check">✓</span><span>All future improvements included</span></div>
+    </div>
+    <button class="btn-upgrade" id="btn-upgrade">Upgrade Now</button>
+    <p class="paywall-fine-print">Secure payment via Stripe. You'll be redirected back here automatically.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  // ─── CONFIG ───────────────────────────────────────────────────────────────
+  const CONFIG = {
+    GROQ_MODEL:         'llama-3.3-70b-versatile',
+    STRIPE_PAYMENT_URL: 'https://buy.stripe.com/REPLACE_WITH_YOUR_LINK',
+    FREE_GENERATIONS:   3,
+  };
+  // ─────────────────────────────────────────────────────────────────────────
+
+  // ── Store ──
+  const Store = {
+    getCount: () => parseInt(localStorage.getItem('outound_count') || '0', 10),
+    incCount: () => localStorage.setItem('outound_count', Store.getCount() + 1),
+    isPaid:   () => localStorage.getItem('outound_paid') === 'true',
+    setPaid:  () => localStorage.setItem('outound_paid', 'true'),
+    getKey:   () => localStorage.getItem('outound_groq_key') || '',
+    setKey:   (k) => localStorage.setItem('outound_groq_key', k),
+  };
+
+  // ── Refs ──
+  const form          = document.getElementById('main-form');
+  const linkedinInput = document.getElementById('linkedin-url');
+  const companyInput  = document.getElementById('company-input');
+  const roleInput     = document.getElementById('role-input');
+  const bgInput       = document.getElementById('background-input');
+  const groqKeyInput  = document.getElementById('groq-key');
+  const keyToggle     = document.getElementById('key-toggle');
+  const btnSubmit     = document.getElementById('btn-submit');
+  const btnLabel      = document.getElementById('btn-label');
+  const resultsEl     = document.getElementById('results');
+  const errorBox      = document.getElementById('error-box');
+  const genBadge      = document.getElementById('gen-badge');
+  const genBadgeText  = document.getElementById('gen-badge-text');
+  const paywallOverlay = document.getElementById('paywall-overlay');
+
+  // ── Init ──
+  function init() {
+    handlePaymentReturn();
+    const savedKey = Store.getKey();
+    if (savedKey) groqKeyInput.value = savedKey;
+    updateBadge();
+
+    form.addEventListener('submit', handleSubmit);
+    keyToggle.addEventListener('click', () => {
+      groqKeyInput.type = groqKeyInput.type === 'password' ? 'text' : 'password';
+    });
+    groqKeyInput.addEventListener('blur', () => {
+      if (groqKeyInput.value.trim()) Store.setKey(groqKeyInput.value.trim());
+    });
+
+    document.getElementById('paywall-close').addEventListener('click', hidePaywall);
+    document.getElementById('btn-upgrade').addEventListener('click', redirectToStripe);
+    paywallOverlay.addEventListener('click', (e) => { if (e.target === paywallOverlay) hidePaywall(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hidePaywall(); });
+  }
+
+  // ── Payment return ──
+  function handlePaymentReturn() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('payment') === 'success') {
+      Store.setPaid();
+      history.replaceState({}, document.title, window.location.pathname);
+      showToast('✓ Payment confirmed — unlimited generations unlocked!');
+    }
+  }
+
+  // ── Badge ──
+  function updateBadge() {
+    if (Store.isPaid()) {
+      genBadge.classList.add('unlimited');
+      genBadgeText.textContent = 'Unlimited';
+    } else {
+      genBadge.classList.remove('unlimited');
+      const remaining = Math.max(0, CONFIG.FREE_GENERATIONS - Store.getCount());
+      genBadgeText.textContent = `${remaining} free generation${remaining !== 1 ? 's' : ''} left`;
+    }
+  }
+
+  // ── Loading ──
+  function setLoading(on) {
+    btnSubmit.disabled = on;
+    if (on) {
+      btnLabel.style.display = 'none';
+      const s = document.createElement('span');
+      s.className = 'spinner';
+      s.id = 'btn-spinner';
+      btnSubmit.appendChild(s);
+    } else {
+      btnLabel.style.display = '';
+      const s = document.getElementById('btn-spinner');
+      if (s) s.remove();
+    }
+  }
+
+  // ── Error ──
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('visible');
+    setTimeout(() => errorBox.classList.remove('visible'), 6000);
+  }
+
+  // ── Shake ──
+  function shakeForm() {
+    form.classList.remove('shake');
+    void form.offsetWidth;
+    form.classList.add('shake');
+  }
+
+  // ── Paywall ──
+  function showPaywall() {
+    paywallOverlay.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+  function hidePaywall() {
+    paywallOverlay.setAttribute('hidden', '');
+    document.body.style.overflow = '';
+  }
+  function redirectToStripe() {
+    window.location.href = CONFIG.STRIPE_PAYMENT_URL;
+  }
+
+  // ── Toast ──
+  function showToast(msg) {
+    const existing = document.querySelector('.toast');
+    if (existing) existing.remove();
+    const t = document.createElement('div');
+    t.className = 'toast';
+    t.textContent = msg;
+    document.body.appendChild(t);
+    setTimeout(() => {
+      t.classList.add('hiding');
+      setTimeout(() => t.remove(), 250);
+    }, 3000);
+  }
+
+  // ── LinkedIn name parsing ──
+  function parseLinkedInName(url) {
+    const match = url.match(/linkedin\.com\/in\/([a-zA-Z0-9-]+)/i);
+    if (!match) return null;
+    let slug = match[1].replace(/-[0-9a-f]{5,}$/i, '').replace(/-\d+$/, '');
+    const parts = slug.split('-').filter(p => p.length > 0);
+    return parts.map(p => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()).join(' ');
+  }
+
+  // ── Email generation ──
+  function generateEmails(firstName, lastName, domain, primaryPattern) {
+    const f = firstName.toLowerCase().replace(/[^a-z]/g, '');
+    const l = lastName.toLowerCase().replace(/[^a-z]/g, '');
+    if (!f || !l) return [];
+
+    const patterns = {
+      'first.last':  `${f}.${l}@${domain}`,
+      'firstlast':   `${f}${l}@${domain}`,
+      'flast':       `${f[0]}${l}@${domain}`,
+      'first_last':  `${f}_${l}@${domain}`,
+      'first-last':  `${f}-${l}@${domain}`,
+      'first':       `${f}@${domain}`,
+      'lastfirst':   `${l}${f}@${domain}`,
+      'last.first':  `${l}.${f}@${domain}`,
+      'firstl':      `${f}${l[0]}@${domain}`,
+      'first.l':     `${f}.${l[0]}@${domain}`,
+    };
+
+    const normalized = primaryPattern.toLowerCase().replace(/[^a-z._\-]/g, '');
+    const result = [];
+
+    if (patterns[normalized]) {
+      result.push({ email: patterns[normalized], pattern: normalized, isPrimary: true });
+    } else if (patterns['first.last']) {
+      result.push({ email: patterns['first.last'], pattern: 'first.last', isPrimary: true });
+    }
+
+    const fallbacks = ['first.last', 'firstlast', 'flast', 'first_last', 'first-last'];
+    for (const p of fallbacks) {
+      if (p !== normalized && patterns[p]) {
+        result.push({ email: patterns[p], pattern: p, isPrimary: false });
+      }
+      if (result.length >= 5) break;
+    }
+    return result;
+  }
+
+  // ── Groq call ──
+  async function callGroq(systemPrompt, userPrompt, maxTokens = 500) {
+    const apiKey = groqKeyInput.value.trim();
+    if (!apiKey) throw new Error('Please enter your Groq API key.');
+
+    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + apiKey,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: CONFIG.GROQ_MODEL,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user',   content: userPrompt },
+        ],
+        max_tokens: maxTokens,
+        temperature: 0.3,
+      }),
+    });
+
+    if (!res.ok) {
+      let errMsg = 'Groq API error ' + res.status;
+      try { const e = await res.json(); errMsg = e?.error?.message || errMsg; } catch {}
+      throw new Error(errMsg);
+    }
+
+    const data = await res.json();
+    return data.choices[0].message.content.trim();
+  }
+
+  async function extractDomainInfo(company, role) {
+    const system = `You extract company email information from a company name and role.
+
+Given a company name and role, return:
+1. The company's primary email domain (e.g., google.com)
+2. The most likely email pattern used
+3. Your confidence level
+
+Common email patterns: first.last, firstlast, flast, first_last, first-last, first, firstl
+
+For well-known companies, use your knowledge of their actual email patterns.
+For unknown companies, default to "first.last" with medium confidence.
+
+Return ONLY valid JSON, exactly this shape (no markdown, no code fences):
+{"domain":"company.com","pattern":"first.last","confidence":"high"}
+
+Confidence: high = well-known company you're certain about; medium = you're guessing pattern; low = unknown company`;
+
+    const user = `Company: ${company}\nRole: ${role}`;
+    const raw = await callGroq(system, user, 200);
+    return JSON.parse(raw.replace(/```json\n?|\n?```/g, '').trim());
+  }
+
+  async function generatePitch(name, company, role, background) {
+    const system = `You write cold outreach emails for students seeking internships.
+
+Write a subject line and email body.
+
+SUBJECT: Create genuine curiosity using specifics. Under 50 chars. No ALL CAPS, no emojis.
+BODY: ONE paragraph, 3-4 sentences. Hook referencing this specific person, connect background in one line, clear low-friction ask.
+
+Return ONLY valid JSON, exactly this shape (no markdown, no code fences):
+{"subject":"...","body":"..."}`;
+
+    const user = `Recipient: ${name} at ${company}\nRole I want: ${role}\nMy background: ${background}`;
+    const raw = await callGroq(system, user, 400);
+    return JSON.parse(raw.replace(/```json\n?|\n?```/g, '').trim());
+  }
+
+  // ── Render results ──
+  function escapeHtml(s) {
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  function renderResults(name, emails, domainInfo, pitch) {
+    const nameParts = name.split(' ');
+    const initials  = nameParts.map(p => p[0]).join('').slice(0, 2).toUpperCase();
+    const firstName = nameParts[0];
+    const lastName  = nameParts[nameParts.length - 1];
+
+    // Card 1: Contact + Emails
+    const emailsHtml = emails.map(e => `
+      <div class="email-item ${e.isPrimary ? 'primary' : ''}">
+        <code>${escapeHtml(e.email)}</code>
+        <span class="email-tag ${e.isPrimary ? 'primary-tag' : 'fallback-tag'}">${e.isPrimary ? 'most likely' : e.pattern}</span>
+      </div>`).join('');
+
+    // Card 2: Pitch
+    const card2Id = 'pitch-card-' + Date.now();
+
+    resultsEl.innerHTML = `
+      <div class="card result-card">
+        <div class="result-card-header">
+          <span class="result-card-label"><span class="label-dot green"></span>Email candidates</span>
+          <button class="btn-ghost" id="copy-emails-btn">Copy top email</button>
+        </div>
+        <div class="contact-header">
+          <div class="avatar">${escapeHtml(initials)}</div>
+          <div>
+            <div class="contact-name">${escapeHtml(name)}</div>
+            <div class="contact-sub">
+              <span>${escapeHtml(companyInput.value.trim())}</span>
+              <span>·</span>
+              <span>${escapeHtml(roleInput.value.trim())}</span>
+            </div>
+          </div>
+        </div>
+        <div class="domain-row">
+          <div class="domain-row-item">
+            <span class="domain-row-key">Domain</span>
+            <span class="domain-row-val">${escapeHtml(domainInfo.domain)}</span>
+          </div>
+          <div class="domain-row-item">
+            <span class="domain-row-key">Pattern</span>
+            <span class="domain-row-val">${escapeHtml(domainInfo.pattern)}</span>
+          </div>
+          <div class="domain-row-item">
+            <span class="domain-row-key">Confidence</span>
+            <span class="confidence-badge ${escapeHtml(domainInfo.confidence)}">${escapeHtml(domainInfo.confidence)}</span>
+          </div>
+        </div>
+        <div class="email-list">${emailsHtml}</div>
+        <div class="verify-note">Verify before sending — use <a href="https://hunter.io/email-verifier" target="_blank">Hunter.io</a> or <a href="https://mailtester.com/" target="_blank">MailTester</a> to confirm the address exists.</div>
+      </div>
+
+      <div class="card result-card" id="${card2Id}">
+        <div class="result-card-header">
+          <span class="result-card-label"><span class="label-dot purple"></span>Cold pitch</span>
+        </div>
+        <div class="subject-row">
+          <div class="subject-label">Subject</div>
+          <div class="subject-text" id="subject-display">${escapeHtml(pitch.subject)}</div>
+        </div>
+        <div class="body-text" id="body-display">${escapeHtml(pitch.body)}</div>
+        <div class="pitch-actions">
+          <button class="btn-ghost" id="btn-copy-pitch">Copy email</button>
+          <button class="btn-ghost" id="btn-regen">Regenerate pitch</button>
+          <button class="btn-ghost" id="btn-mailto">Open in mail app</button>
+        </div>
+      </div>`;
+
+    resultsEl.classList.add('visible');
+
+    // ── Result event listeners ──
+    document.getElementById('copy-emails-btn').addEventListener('click', () => {
+      const topEmail = emails[0]?.email || '';
+      navigator.clipboard.writeText(topEmail).catch(() => {});
+      const btn = document.getElementById('copy-emails-btn');
+      btn.textContent = 'Copied ✓';
+      setTimeout(() => { btn.textContent = 'Copy top email'; }, 1500);
+    });
+
+    document.getElementById('btn-copy-pitch').addEventListener('click', () => {
+      const text = 'Subject: ' + document.getElementById('subject-display').textContent + '\n\n' + document.getElementById('body-display').textContent;
+      navigator.clipboard.writeText(text).catch(() => {});
+      const btn = document.getElementById('btn-copy-pitch');
+      btn.textContent = 'Copied ✓';
+      setTimeout(() => { btn.textContent = 'Copy email'; }, 1500);
+    });
+
+    document.getElementById('btn-regen').addEventListener('click', async () => {
+      const btn = document.getElementById('btn-regen');
+      btn.disabled = true;
+      btn.textContent = 'Writing...';
+      try {
+        const newPitch = await generatePitch(name, companyInput.value.trim(), roleInput.value.trim(), bgInput.value.trim());
+        document.getElementById('subject-display').textContent = newPitch.subject;
+        document.getElementById('body-display').textContent   = newPitch.body;
+        Object.assign(pitch, newPitch);
+      } catch (e) {
+        showError(e.message);
+      }
+      btn.disabled = false;
+      btn.textContent = 'Regenerate pitch';
+    });
+
+    document.getElementById('btn-mailto').addEventListener('click', () => {
+      const email   = emails[0]?.email || '';
+      const subject = document.getElementById('subject-display').textContent;
+      const body    = document.getElementById('body-display').textContent;
+      window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+  }
+
+  // ── Submit ──
+  async function handleSubmit(e) {
+    e.preventDefault();
+    errorBox.classList.remove('visible');
+
+    // Gate check
+    if (!Store.isPaid() && Store.getCount() >= CONFIG.FREE_GENERATIONS) {
+      showPaywall();
+      return;
+    }
+
+    const linkedinUrl = linkedinInput.value.trim();
+    const company     = companyInput.value.trim();
+    const role        = roleInput.value.trim();
+    const background  = bgInput.value.trim();
+    const apiKey      = groqKeyInput.value.trim();
+
+    if (!linkedinUrl || !company || !role || !background || !apiKey) {
+      shakeForm();
+      showError('Please fill in all fields before generating.');
+      return;
+    }
+
+    const name = parseLinkedInName(linkedinUrl);
+    if (!name) {
+      shakeForm();
+      showError('Could not parse a name from that LinkedIn URL. It should look like: linkedin.com/in/firstname-lastname');
+      return;
+    }
+    const nameParts = name.split(' ');
+    if (nameParts.length < 2) {
+      shakeForm();
+      showError('Need at least a first and last name in the URL (e.g. linkedin.com/in/john-smith).');
+      return;
+    }
+
+    Store.setKey(apiKey);
+    setLoading(true);
+    resultsEl.classList.remove('visible');
+
+    try {
+      const domainInfo = await extractDomainInfo(company, role);
+      const emails     = generateEmails(nameParts[0], nameParts[nameParts.length - 1], domainInfo.domain, domainInfo.pattern);
+      const pitch      = await generatePitch(name, company, role, background);
+
+      Store.incCount();
+      updateBadge();
+      renderResults(name, emails, domainInfo, pitch);
+
+      // Smooth scroll to results
+      resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch (err) {
+      showError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>
