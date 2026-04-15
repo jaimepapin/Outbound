@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "Outound/index.html",
-      "use": "@vercel/static"
-    }
-  ],
+  "buildCommand": "node build.js",
+  "outputDirectory": "dist",
   "routes": [
-    { "src": "/(.*)", "dest": "/Outound/index.html" }
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 }
