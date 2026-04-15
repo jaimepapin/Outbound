@@ -5,5 +5,8 @@
       "src": "Outound/index.html",
       "use": "@vercel/static"
     }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/Outound/index.html" }
   ]
 }
